@@ -1,20 +1,30 @@
+
 .card {
-    width: 750px;
-    padding: 0 30px 0 0;
-    background-color: #f8f9fa;
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: 8vh auto;
+  padding: 32px;
+  border-radius: 20px;
+  background: linear-gradient(145deg, var(--mc-red), var(--mc-dark));
+  border: 3px solid var(--gold);
+  box-shadow: 0 10px 35px rgba(0, 0, 0, 0.6);
+  transition: transform 0.25s ease, box-shadow 0.3s ease;
 }
 
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.7);
+}
+
+/* ===== IMAGEM ===== */
 .imageContainer {
-    width: 350px;
-    height: 450px;
-    position: relative;
-}
-
-.image {
-    object-fit: cover;
-    border-radius: 8px;
-}
-
-.list {
-    padding: 0 0 15px 15px;
+  position: relative;
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 5px solid var(--gold);
+  background: #111;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.5);
 }
