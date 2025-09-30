@@ -7,6 +7,7 @@ import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./Personagens.module.css";
+import Header from "../../components/header/Header"; 
 
 export default function Personagens() {
   const [data, setData] = useState({
@@ -73,6 +74,7 @@ export default function Personagens() {
 
   return (
     <div>
+      <Header />
       <h1>Lista de Personagens</h1>
       <Pagination
         current={data.current}
