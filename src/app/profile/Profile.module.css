@@ -2,6 +2,16 @@
   display: flex;
   flex-direction: column;
 }
+
+.backgroundImage {
+  background-image: url('https://recreio.com.br/wp-content/uploads/2024/02/radiatorsprings.jpg'); 
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+} 
+
 .main {
   display: flex;
   justify-content: center;
@@ -74,18 +84,296 @@
   top: 0;
 }
 
+.wrapper {
+  min-height: 100vh;
+  background-color: #1a1a1a;
+  width: 100%;
+  overflow-x: hidden;
+  font-family: 'Racing Sans One', 'Segoe UI', sans-serif;
+}
+
+.mainContainer {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.heroSection {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  background-image: url('https://recreio.com.br/wp-content/uploads/2024/02/radiatorsprings.jpg'); 
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+
+.heroOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.8) 0%,
+    rgba(220, 53, 69, 0.3) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  max-width: 1200px;
+  width: 90%;
+  margin: 0 auto;
+  padding: 300px 20px;
+  color: white;
+  text-align: center;
+  z-index: 2;
+}
+
+.heroTitle {
+  font-size: 6rem;
+  font-weight: 800;
+  margin-bottom: 24px;
+  background: linear-gradient(45deg, #dc3545, #ff6b6b);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 4px 4px 8px rgba(0, 0, 0, 0.3);
+  animation: engineRevUp 1s ease;
+  letter-spacing: 2px;
+}
+
+.heroSubtitle {
+  font-size: 2rem;
+  line-height: 1.6;
+  margin-bottom: 40px;
+  color: #ffd700;
+  animation: fadeInUp 1s ease 0.3s;
+  animation-fill-mode: both;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.exploreButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 25px 50px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(45deg, #dc3545, #ff4136);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+  animation: pulseEngine 2s infinite;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.exploreButton:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 30px rgba(220, 53, 69, 0.8);
+}
+
+.featuresSection {
+  padding: 120px 40px;
+  background: linear-gradient(135deg, #2c3e50 0%, #1a1a1a 100%);
+  position: relative;
+}
+
+.featuresSection::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 5px;
+  background: linear-gradient(90deg, #dc3545, #ff4136, #dc3545);
+  animation: roadLine 2s linear infinite;
+}
+
+.featuresTitle {
+  text-align: center;
+  font-size: 3.5rem;
+  color: #ffd700;
+  margin-bottom: 60px;
+  font-weight: 700;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.featuresGrid {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 40px;
+  padding: 40px 20px;
+}
+
+.featureCard {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 50px 40px;
+  border-radius: 30px;
+  text-align: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border: 2px solid rgba(220, 53, 69, 0.3);
+  backdrop-filter: blur(10px);
+  color: white;
+}
+
+.featureCard:hover {
+  transform: translateY(-10px);
+  border-color: #dc3545;
+  box-shadow: 0 0 30px rgba(220, 53, 69, 0.4);
+}
+
+.featureIcon {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #ffd700;
+  text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+}
+
+.featureCard h3 {
+  color: #ffffff;
+  font-size: 1.8rem;
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+
+.featureCard p {
+  color: #dddddd;
+  line-height: 1.8;
+  font-size: 1.1rem;
+}
+
+.callToAction {
+  background: url('https://images.alphacoders.com/273/273673.jpg') center/cover fixed;
+  position: relative;
+  color: white;
+  padding: 150px 40px;
+  margin: 0;
+  text-align: center;
+}
+
+.callToAction::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+.callToAction h2 {
+  position: relative;
+  color: #ffd700;
+  font-size: 4rem;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.ctaButton {
+  position: relative;
+  display: inline-block;
+  padding: 25px 50px;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: white;
+  background: linear-gradient(45deg, #dc3545, #ff4136);
+  border-radius: 50px;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-top: 1.5rem
+;}
+
+.ctaButton:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 0 30px rgba(220, 53, 69, 0.8);
+}
+
+/* Novas Animações */
+@keyframes engineRevUp {
+  0% {
+    opacity: 0;
+    transform: translateY(-50px) scale(0.9);
+  }
+  50% {
+    transform: translateY(10px) scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes pulseEngine {
+  0% {
+    box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+  }
+  50% {
+    box-shadow: 0 0 30px rgba(220, 53, 69, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 20px rgba(220, 53, 69, 0.6);
+  }
+}
+
+@keyframes roadLine {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
+/* Media Queries Aprimoradas */
+@media (max-width: 1200px) {
+  .heroTitle {
+    font-size: 5rem;
+  }
+}
+
 @media (max-width: 768px) {
-  .flexContainer {
-    flex-direction: column;
-    align-items: center;
+  .heroTitle {
+    font-size: 3.5rem;
   }
-
-  .imageContainer {
-    width: 150px;
-    height: 150px;
+  
+  .heroSubtitle {
+    font-size: 1.5rem;
   }
+  
+  .featuresGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .callToAction h2 {
+    font-size: 3rem;
+  }
+}
 
-  .list li {
-    font-size: 0.9rem;
+@media (max-width: 480px) {
+  .heroTitle {
+    font-size: 2.8rem;
+  }
+  
+  .heroContent {
+    padding: 120px 20px;
+  }
+  
+  .exploreButton, .ctaButton {
+    padding: 20px 35px;
+    font-size: 1.2rem;
   }
 }

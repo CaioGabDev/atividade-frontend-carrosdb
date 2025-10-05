@@ -2,12 +2,13 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Pagination, Modal, Card, Skeleton } from "antd";
+import { Pagination, Card, Skeleton } from "antd";
 import Image from "next/image";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./Personagens.module.css";
-import Header from "../../components/header/Header"; 
+import Header from "../../components/header/Header";
+import Link from "next/link";
 
 export default function Personagens() {
   const [data, setData] = useState({
@@ -17,55 +18,24 @@ export default function Personagens() {
     pageSize: 5,
   });
 
-  const [modalInfo, setModalInfo] = useState({
-    visible: false,
-    personagem: null,
-    favorito: null,
-    loading: false,
-  });
-
-  const api = axios.create({
-    baseURL: "http://localhost:3001/api/",
-  });
-
   useEffect(() => {
-    const fetchPersonagens = async () => {
+    const fetchTodosPersonagens = async () => {
       try {
-        const response = await api.get("/personagens");
-        setData({
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}`);
+        setData((prev) => ({
+          ...prev,
           personagens: response.data,
           loading: false,
-          current: 1,
-          pageSize: 5,
-        });
+        }));
       } catch (error) {
-        toast.error("Erro ao carregar personagens");
+        console.error("Erro ao buscar Personagens:", error);
+        toast.error("Falha ao carregar personagens.");
         setData((prev) => ({ ...prev, loading: false }));
       }
     };
 
-    fetchPersonagens();
+    fetchTodosPersonagens();
   }, []);
-
-  const openModal = async (personagem) => {
-    setModalInfo({ visible: true, personagem, favorito: null, loading: true });
-
-    try {
-      const response = await api.get(`/favoritos/${personagem.id}`);
-      setModalInfo((m) => ({
-        ...m,
-        favorito: response.data,
-        loading: false,
-      }));
-    } catch (error) {
-      if (error.response && error.response.status === 404) {
-        setModalInfo((m) => ({ ...m, favorito: null, loading: false }));
-      } else {
-        toast.error("Erro ao carregar informações do favorito.");
-        setModalInfo((m) => ({ ...m, loading: false }));
-      }
-    }
-  };
 
   const paginatedPersonagens = () => {
     const start = (data.current - 1) * data.pageSize;
@@ -75,121 +45,72 @@ export default function Personagens() {
   return (
     <div>
       <Header />
-      <h1>Lista de Personagens</h1>
-      <Pagination
-        current={data.current}
-        pageSize={data.pageSize}
-        total={data.personagens.length}
-        onChange={(page, size) =>
-          setData((prev) => ({ ...prev, current: page, pageSize: size }))
-        }
-        showSizeChanger
-        pageSizeOptions={["5", "10", "20"]}
-      />
+      <div className={styles.container}>
+        <h1 className={styles.titulo}>Personagens Incríveis</h1>
+        <p className={styles.subtitulo}>
+          Explore os personagens e descubra curiosidades!
+        </p>
+        <Pagination
+          className={styles.pagination}
+          current={data.current}
+          pageSize={data.pageSize}
+          total={data.personagens.length}
+          onChange={(page, size) =>
+            setData((prev) => ({ ...prev, current: page, pageSize: size }))
+          }
+          showSizeChanger
+          pageSizeOptions={["5", "10", "20"]}
+        />
 
-      {data.loading ? (
-        <div className={styles.loadingContainer}>
-          <Image
-            src="/images/loading.gif"
-            width={300}
-            height={200}
-            alt="Loading"
-            unoptimized
-          />
-        </div>
-      ) : (
-        <div className={styles.cardsContainer}>
-          {paginatedPersonagens().map((personagem) => (
-            <Card
-              key={personagem.id}
-              className={styles.card}
-              hoverable
-              onClick={() => openModal(personagem)}
-              cover={
-                <Image
-                  alt={personagem.nome}
-                  src={
-                    personagem.imagem_url && personagem.imagem_url.startsWith("http")
-                      ? personagem.imagem_url
-                      : "/images/default-character.png"
-                  }
-                  width={220}
-                  height={220}
-                  unoptimized
-                />
-              }
-            >
-              <Card.Meta
-                title={personagem.nome}
-                description={personagem.descricao}
-              />
-            </Card>
-          ))}
-        </div>
-      )}
-
-      <Modal
-        title={`Detalhes de ${modalInfo.personagem?.nome}`}
-        open={modalInfo.visible}
-        onCancel={() =>
-          setModalInfo({
-            visible: false,
-            personagem: null,
-            favorito: null,
-            loading: false,
-          })
-        }
-        onOk={() =>
-          setModalInfo({
-            visible: false,
-            personagem: null,
-            favorito: null,
-            loading: false,
-          })
-        }
-        width={600}
-      >
-        {modalInfo.loading ? (
-          <Skeleton active />
-        ) : (
-          <div className={styles.detalhesPersonagem}>
+        {data.loading ? (
+          <div className={styles.loadingContainer}>
             <Image
-              src={
-                modalInfo.personagem?.imagem_url &&
-                modalInfo.personagem?.imagem_url.startsWith("http")
-                  ? modalInfo.personagem.imagem_url
-                  : "/images/default-character.png"
-              }
-              alt={modalInfo.personagem?.nome || "Sem nome"}
-              width={220}
-              height={220}
+              src="/images/loading.gif"
+              width={300}
+              height={200}
+              alt="Loading"
               unoptimized
             />
-            <p>
-              <span className={styles.label}>Descrição:</span>{" "}
-              {modalInfo.personagem?.descricao}
-            </p>
-            <p>
-              <span className={styles.label}>Filmes:</span>{" "}
-              {modalInfo.personagem?.filmes}
-            </p>
-            <p>
-              <span className={styles.label}>Curiosidades:</span>{" "}
-              {modalInfo.personagem?.curiosidades}
-            </p>
-
-            {modalInfo.favorito ? (
-              <p className={styles.favorito}>
-                ⭐ Este personagem está nos favoritos!
-              </p>
-            ) : (
-              <p style={{ textAlign: "center" }}>
-                Este personagem não está nos favoritos.
-              </p>
-            )}
+          </div>
+        ) : (
+          <div className={styles.personagensContainer}>
+            {paginatedPersonagens().map((personagem) => (
+              <Link
+                href={`/personagens/${personagem.id}`}
+                key={personagem.id}
+                className={styles.cardLink}
+              >
+                <Card
+                  className={styles.personagemCard}
+                  hoverable
+                  cover={
+                    <Image
+                      alt={personagem.nome}
+                      src={
+                        personagem.imagem_url &&
+                        personagem.imagem_url.startsWith("http")
+                          ? personagem.imagem_url
+                          : "/images/default-character.png"
+                      }
+                      width={220}
+                      height={220}
+                      unoptimized
+                      className={styles.cardImage}
+                    />
+                  }
+                >
+                  <Card.Meta
+                    title={<span className={styles.cardTitle}>{personagem.nome}</span>}
+                    description={
+                      <span className={styles.cardDesc}>{personagem.descricao}</span>
+                    }
+                  />
+                </Card>
+              </Link>
+            ))}
           </div>
         )}
-      </Modal>
+      </div>
       <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );

@@ -1,22 +1,34 @@
 "use client";
 
-import Link from "next/link";
-import styles from "./Header.module.css";
+import { useState } from 'react';
+import Link from 'next/link';
+import styles from './Header.module.css';
 
 export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
   return (
     <header className={styles.header}>
-      <div className={styles.logo}>Meu Site Dev 🚀</div>
-      <nav>
+      <nav className={styles.nav}>
+        <Link href="/" className={styles.logo}>
+          Coleção McQueen
+        </Link>
         <ul className={styles.navList}>
           <li>
-            <Link href="/">Home</Link>
+            <Link href="/profile" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Home</Link>
           </li>
           <li>
-            <Link href="/personagens">Listagem</Link>
+            <Link href="/personagens" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Personagens</Link>
           </li>
           <li>
-            <Link href="/sobre">Sobre mim</Link>
+            <Link href="/favoritos" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Favoritos</Link>
+          </li>
+          <li>
+            <Link href="/sobre" className={styles.navLink} onClick={() => setIsMenuOpen(false)}>Sobre Mim</Link>
           </li>
         </ul>
       </nav>

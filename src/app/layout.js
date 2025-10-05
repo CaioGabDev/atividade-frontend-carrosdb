@@ -1,5 +1,12 @@
+import { Racing_Sans_One } from 'next/font/google';
 import { Roboto } from "next/font/google";
 import "./globals.css";
+
+const racingSansOne = Racing_Sans_One({
+  weight: '400',
+  subsets: ['latin'],
+  display: 'swap',
+});
 
 const font = Roboto({
   variable: "--font",
@@ -16,7 +23,7 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="pt-BR">
+    <html lang="en" className={racingSansOne.className}>
       <body className={`${font.variable} `}>
         {children}
       </body>
