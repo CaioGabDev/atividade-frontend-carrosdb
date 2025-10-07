@@ -83,21 +83,47 @@
   width: 100%;
 }
 
+/* Media Queries para Responsividade */
+@media (max-width: 1200px) {
+  .nav {
+    padding: 1rem 1.5rem;
+  }
+
+  .navLinks {
+    gap: 30px;
+  }
+
+  .navList {
+    gap: 3rem;
+  }
+}
+
 @media (max-width: 768px) {
   .nav {
-    padding: 1rem;
+    padding: 0.8rem 1rem;
+    flex-wrap: wrap;
   }
-  
+
   .logo {
     font-size: 1.5rem;
   }
-  
+
   .navLinks {
-    gap: 20px;
+    gap: 15px;
+    width: 100%;
+    justify-content: center;
+    padding-top: 0.5rem;
   }
-  
+
+  .navList {
+    gap: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
   .navLink {
     font-size: 1rem;
+    padding: 6px 0;
   }
 }
 

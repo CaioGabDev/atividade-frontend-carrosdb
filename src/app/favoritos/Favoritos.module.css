@@ -59,7 +59,7 @@
   max-width: 1400px;
   margin: 80px auto 0;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
+
   min-height: calc(100vh - 80px);
   position: relative;
   z-index: 1;
@@ -68,13 +68,12 @@
 .titulo {
   font-size: 4.5rem;
   text-align: center;
-  background: linear-gradient(45deg, #ffd700, #ff4136);
+  background: rgba(30, 41, 59, 0.95);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-family: 'Racing Sans One', sans-serif;
   text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
   margin-bottom: 15px;
-  animation: engineRevUp 1.2s ease;
   letter-spacing: 2px;
 }
 
@@ -86,13 +85,36 @@
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
+/* === PAGINAÇÃO === */
 .pagination {
   text-align: center;
   margin: 40px 0;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
+  padding: 10px;
+}
+
+.pagination :global(.ant-pagination-item),
+.pagination :global(.ant-pagination-item-link) {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transition: all 0.3s ease;
+}
+
+.pagination :global(.ant-pagination-item-active) {
+  background: #007CF0; /* Usando a nova cor de destaque */
+  border-color: #007CF0;
+  transform: scale(1.1); /* Mantive o efeito de escala que é bom */
+}
+
+.pagination :global(.ant-pagination-item:hover),
+.pagination :global(.ant-pagination-item-link:hover) {
+  border-color: #007CF0;
+  color: #007CF0;
+}
+
+.pagination :global(.ant-pagination-item-active a),
+.pagination :global(.ant-pagination-item-active:hover a) {
+  color: white !important;
 }
 
 .loadingContainer {
@@ -114,19 +136,20 @@
 }
 
 .favoritoCard {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 2px solid rgba(220, 53, 69, 0.3) !important;
-  border-radius: 25px !important;
+  background: rgba(30, 41, 59, 0.5) !important; /* Fundo um pouco mais sólido */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important; /* Bordas um pouco menos arredondadas */
   overflow: hidden;
-  transition: all 0.4s ease !important;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
 }
 
 .favoritoCard:hover {
-  transform: translateY(-15px);
-  border-color: #dc3545 !important;
-  box-shadow: 0 15px 35px rgba(220, 53, 69, 0.4) !important;
+  /* Animação de hover mais sutil e elegante */
+  transform: translateY(-10px);
+  border-color: rgba(0, 124, 240, 0.8) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
-
 .cardImage {
   width: 100% !important;
   height: 320px !important;
@@ -211,11 +234,20 @@
 
 @media (max-width: 1200px) {
   .favoritosContainer {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
   }
   
   .titulo {
     font-size: 4rem;
+  }
+
+  .heroSection {
+    height: 35vh;
+  }
+
+  .content {
+    padding: 60px 20px;
   }
 }
 
@@ -231,6 +263,29 @@
 
   .subtitulo {
     font-size: 1.3rem;
+    margin-bottom: 30px;
+  }
+
+  .heroSection {
+    height: 30vh;
+  }
+
+  .title {
+    font-size: 3rem;
+  }
+
+  .subtitle {
+    font-size: 1.3rem;
+  }
+
+  .pagination {
+    margin: 30px 0;
+    padding: 15px;
+  }
+
+  .favoritosContainer {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
   }
 }
 
@@ -241,10 +296,37 @@
   }
   
   .titulo {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
 
   .subtitulo {
+    font-size: 1rem;
+    margin-bottom: 25px;
+  }
+
+  .heroSection {
+    height: 25vh;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .subtitle {
     font-size: 1.1rem;
+  }
+
+  .content {
+    padding: 40px 15px;
+  }
+
+  .pagination {
+    margin: 20px 0;
+    padding: 10px;
+  }
+
+  .favoritosContainer {
+    grid-template-columns: 1fr;
+    gap: 15px;
   }
 }

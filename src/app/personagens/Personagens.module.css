@@ -1,92 +1,10 @@
-.cardsContainer {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 20px;
-  padding: 20px;
-}
-
-.card {
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-}
-
+/* === ESTRUTURA E LAYOUT GERAL === */
 .container {
   max-width: 1400px;
   margin: 80px auto 0;
   padding: 40px 20px;
-  background: linear-gradient(135deg, #1a1a1a 0%, #2c3e50 100%);
   min-height: calc(100vh - 80px); 
-  position: relative;
-  z-index: 1;
-}
-
-.titulo {
-  font-size: 4.5rem;
-  text-align: center;
-  background: linear-gradient(45deg, #ffd700, #ff4136);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  font-family: 'Racing Sans One', sans-serif;
-  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
-  margin-bottom: 15px;
-  animation: engineRevUp 1.2s ease;
-  letter-spacing: 2px;
-  text-decoration: none;
-}
-
-.subtitulo {
-  text-align: center;
-  color: #ffffff;
-  font-size: 1.6rem;
-  margin-bottom: 50px;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-  font-weight: 300;
-  max-width: 800px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 1.6;
-}
-
-.pagination {
-  text-align: center;
-  margin: 40px 0;
-  padding: 20px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 15px;
-  backdrop-filter: blur(10px);
-}
-
-.pagination :global(.ant-pagination-item) {
-  background: transparent;
-  border: 2px solid rgba(220, 53, 69, 0.3);
-  transition: all 0.3s ease;
-}
-
-.pagination :global(.ant-pagination-item-active) {
-  background: linear-gradient(45deg, #dc3545, #ff4136);
-  border-color: transparent;
-  transform: scale(1.1);
-}
-
-.pagination :global(.ant-pagination-item:hover) {
-  border-color: #ff4136;
-  transform: translateY(-3px);
-}
-
-.loadingContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  min-height: 400px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 20px;
-  backdrop-filter: blur(5px);
+  width: 100%;
 }
 
 .personagensContainer {
@@ -94,202 +12,146 @@
   grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   gap: 35px;
   padding: 20px 0;
-  perspective: 1000px;
 }
 
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 400px;
+}
+
+.titulo {
+  font-size: 4.5rem;
+  text-align: center;
+  background: rgba(30, 41, 59, 0.95);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Racing Sans One', sans-serif;
+  text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* Sombra mais suave */
+  margin-bottom: 15px;
+  letter-spacing: 2px;
+}
+
+.subtitulo {
+  font-size: 1.5rem;
+  color: #ffffff;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+/* === ESTILO DOS CARDS === */
 .personagemCard {
-  background: rgba(255, 255, 255, 0.08) !important;
-  border: 2px solid rgba(220, 53, 69, 0.3) !important;
-  border-radius: 25px !important;
+  background: rgba(30, 41, 59, 0.5) !important; /* Fundo um pouco mais sólido */
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 16px !important; /* Bordas um pouco menos arredondadas */
   overflow: hidden;
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1) !important;
-  backdrop-filter: blur(12px);
-  transform-style: preserve-3d;
+  backdrop-filter: blur(10px);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
 }
 
 .personagemCard:hover {
-  transform: translateY(-15px) scale(1.03) rotateX(5deg);
-  border-color: #dc3545 !important;
-  box-shadow: 0 15px 35px rgba(220, 53, 69, 0.4) !important;
+  /* Animação de hover mais sutil e elegante */
+  transform: translateY(-10px);
+  border-color: rgba(0, 124, 240, 0.8) !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3) !important;
 }
 
 .cardImage {
   width: 100% !important;
   height: 320px !important;
   object-fit: cover;
-  border-bottom: 3px solid rgba(220, 53, 69, 0.3);
-  transition: all 0.5s ease;
-  filter: brightness(0.9);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Borda da imagem mais fina */
+  transition: transform 0.4s ease;
+  filter: brightness(0.95);
 }
 
 .personagemCard:hover .cardImage {
-  transform: scale(1.08);
-  filter: brightness(1.1);
+  transform: scale(1.05);
+  filter: brightness(1.05);
 }
 
 .cardTitle {
-  color: #ffd700 !important;
-  font-size: 2rem !important;
-  font-family: 'Racing Sans One', sans-serif;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
-  margin: 20px 0 15px !important;
-  letter-spacing: 1px;
+  /* Usando uma fonte mais limpa e legível para o card */
+  font-family: 'Inter', sans-serif;
+  color: #EAEAEA !important;
+  font-size: 1.75rem !important;
+  font-weight: 600; /* Dando mais peso para o título */
+  text-shadow: none;
+  margin: 15px 0 10px !important;
 }
 
 .cardDesc {
-  color: #ffffff !important;
-  font-size: 1.2rem !important;
-  line-height: 1.7 !important;
+  font-family: 'Inter', sans-serif;
+  color: #A0A0A0 !important; /* Cinza claro para descrição */
+  font-size: 1.1rem !important;
+  line-height: 1.6 !important;
   padding: 0 15px 20px !important;
-  opacity: 0.9;
+  opacity: 1;
 }
 
-
-.detalhesPersonagem {
-  color: #ffffff;
-  padding: 30px;
-}
-
-.modalImage {
-  border-radius: 20px;
-  border: 4px solid #dc3545;
-  box-shadow: 0 0 30px rgba(220, 53, 69, 0.4);
-  margin-bottom: 25px;
-  transition: transform 0.3s ease;
-}
-
-.modalImage:hover {
-  transform: scale(1.02);
-}
-
-.label {
-  color: #ffd700;
-  font-weight: bold;
-  font-size: 1.3rem;
-  margin-right: 15px;
-  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
-}
-
-.favorito {
+/* === PAGINAÇÃO === */
+.pagination {
   text-align: center;
-  color: #ffd700;
-  font-size: 1.3rem;
-  margin-top: 25px;
-  padding: 15px;
-  border: 2px solid #ffd700;
-  border-radius: 15px;
-  animation: pulseGold 2s infinite;
-  background: rgba(255, 215, 0, 0.1);
+  margin: 40px 0;
+  padding: 10px;
 }
 
-.naoFavorito {
-  text-align: center;
-  color: #ffffff;
-  font-size: 1.3rem;
-  margin-top: 25px;
-  padding: 15px;
-  border: 2px solid rgba(255, 255, 255, 0.3);
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.05);
+.pagination :global(.ant-pagination-item),
+.pagination :global(.ant-pagination-item-link) {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  transition: all 0.3s ease;
 }
 
-/* Enhanced Animations */
-@keyframes engineRevUp {
-  0% {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
-  }
-  50% {
-    transform: translateY(10px) scale(1.1);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
+.pagination :global(.ant-pagination-item-active) {
+  background: #007CF0; /* Usando a nova cor de destaque */
+  border-color: #007CF0;
+  transform: scale(1.1); /* Mantive o efeito de escala que é bom */
 }
 
-@keyframes pulseGold {
-  0% {
-    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0.6);
-    transform: scale(1);
-  }
-  70% {
-    box-shadow: 0 0 0 15px rgba(255, 215, 0, 0);
-    transform: scale(1.02);
-  }
-  100% {
-    box-shadow: 0 0 0 0 rgba(255, 215, 0, 0);
-    transform: scale(1);
-  }
+.pagination :global(.ant-pagination-item:hover),
+.pagination :global(.ant-pagination-item-link:hover) {
+  border-color: #007CF0;
+  color: #007CF0;
 }
 
-/* Improved Media Queries */
-@media (max-width: 1200px) {
-  .personagensContainer {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-  
-  .titulo {
-    font-size: 4rem;
-  }
+.pagination :global(.ant-pagination-item-active a),
+.pagination :global(.ant-pagination-item-active:hover a) {
+  color: white !important;
 }
 
-@media (max-width: 768px) {
-  .container {
-    margin-top: 60px;
-    padding: 30px 15px;
-  }
-  
-  .titulo {
-    font-size: 3.2rem;
-  }
-
-  .subtitulo {
-    font-size: 1.3rem;
-    margin-bottom: 35px;
-  }
-
+/* === RESPONSIVIDADE === */
+@media screen and (max-width: 1200px) {
   .personagensContainer {
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 25px;
   }
+}
 
-  .cardImage {
-    height: 280px !important;
+@media screen and (max-width: 768px) {
+  .container {
+    padding: 30px 15px;
+    margin-top: 60px;
   }
-  
-  .cardTitle {
-    font-size: 1.8rem !important;
+  .titulo {
+    font-size: 3rem;
+  }
+  .subtitulo {
+    font-size: 1.2rem;
   }
 }
 
-@media (max-width: 480px) {
+@media screen and (max-width: 480px) {
   .container {
-    margin-top: 50px;
     padding: 20px 10px;
+    margin-top: 50px;
   }
-  
   .titulo {
-    font-size: 2.8rem;
+    font-size: 2.5rem;
   }
-
-  .subtitulo {
-    font-size: 1.1rem;
-  }
-
-  .cardImage {
-    height: 240px !important;
-  }
-  
   .personagensContainer {
     grid-template-columns: 1fr;
-  }
-  
-  .cardTitle {
-    font-size: 1.6rem !important;
-  }
-  
-  .cardDesc {
-    font-size: 1.1rem !important;
+    gap: 20px;
   }
 }
